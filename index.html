@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Row Layout</title>
+    <script src="script.js"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=nunito@200,400,800&f[]=bebas-neue@100,200,400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+            }
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            .body {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            }
+        body, html {
+            color: #160000;
+            background: #C4FF58;
+        }
+        @font-face {
+            font-family: 'lexa';
+            src: url('lexa.otf');
+        }
+
+        @font-face {
+            font-family: 'NeueBit';
+            src: url('PPNeueBit-Bold.otf');
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            
+            
+            
+        }
+        .row1 {
+            font-family: "Satoshi";
+            display: flex;
+            flex: 0.7;
+            font-weight: 400;
+            background: #C4FF58;
+            z-index: 2;
+        }
+        .row1 > div {
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+        }
+        .col1 {justify-content: center; font-family: "lexa";font-size: 2vw; }
+        .col2 {font-size: 1vw;}
+        .col3 {justify-content: center; font-size: 1vw; }
+        .col4 {justify-content: center; font-size: 1vw; }
+        .col5 {justify-content: center; font-size: 1vw;}
+        .col6 {justify-content: center; font-size: 1vw;}
+        .col1,.col4,.col6{flex:0.075;}
+        .col2,.col3{flex: 0.3;}
+        .col5{flex: 0.225;}
+        .col2 p{
+            margin-left: 2%;
+        }
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            15% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 1;
+            }
+            45% {
+                opacity: 0;
+            }
+            60% {
+                opacity: 1;
+            }
+            75% {
+                opacity: 0;
+            }
+            90% {
+                opacity: 1;
+            }
+            105% {
+                opacity: 0;
+            }
+
+
+        }
+        .col3{display: flex;}
+        .col3 > div {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.3s ease;
+            
+        }
+        .col3 > div:hover {
+            animation: blink 1s infinite; /* Apply blinking effect */
+        }
+        
+        .row2 {
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .row2 a-waves {
+    --x: -0.5rem;
+    --y: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .row2 a-waves:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #160000;
+    border-radius: 50%;
+    transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0);
+    will-change: transform;
+    content: "";
+  }
+  
+  .row2 canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+        .row3 {
+            position: relative;
+            z-index: 9 !important;
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            background-color: #C4FF58;
+        }
+        .subrow1, .subrow2, .subrow3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9;
+        }
+        .subrow2{
+            border: 1px solid black;
+        }
+        .subrow1 { flex: 0.1;border-top: 1px black solid; }
+        .subrow2 { flex: 1;font-family: "Bebas Neue"; font-weight: 800; font-size: 12vw; }
+        .subrow3 { flex: 0.1; border-bottom: 1px black solid;}
+        
+        .lines-conatiner{
+
+            margin: 0; /* Remove default margins */
+            display: flex;
+            justify-content: center; /* Horizontally center the content */
+            align-items: center; /* Vertically center the content */
+            position: relative;
+        }
+        .lines-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vertical-line1 {
+            position: absolute;
+            left: 27.5%;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: black;
+        }
+        .vertical-line2 {
+            position: absolute;
+            left: 20%;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: black;
+        }
+        .vertical-line3 {
+            position: absolute;
+            left: 10%;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: black;
+        }
+        .vertical-line4 {
+            position: absolute;
+            right: 27.5%;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: black;
+        }
+        .vertical-line5 {
+            position: absolute;
+            right: 20%;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: black;
+        }
+        .vertical-line6 {
+            position: absolute;
+            right: 10%;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: black;
+        }
+
+        /* Right side lines */
+        .line1, .line2, .line3, .line4, .line5, .line6, .line7, .line8, .line9, .line10 {
+            position: absolute;
+            right: 0%;
+            width: 50vw;
+            height: 1px;
+            background-color: black;
+            transform-origin: right center;
+            transition: transform 0.1s;
+        }
+
+        /* Left side lines */
+        .left-line1, .left-line2, .left-line3, .left-line4, .left-line5, .left-line6, .left-line7, .left-line8, .left-line9, .left-line10 {
+            position: absolute;
+            left: 0%;
+            width: 50vw;
+            height: 1px;
+            background-color: black;
+            transform-origin: left center;
+            transition: transform 0.1s;
+        }
+
+        /* Right side lines */
+        .line1 { top: 10%; transform: rotate(10deg); }
+        .line2 { top: 20%; transform: rotate(10deg); }
+        .line3 { top: 30%; transform: rotate(10deg); }
+        .line4 { top: 40%; transform: rotate(10deg); }
+        .line5 { top: 50%; transform: rotate(10deg); }
+        .line6 { top: 60%; transform: rotate(10deg); }
+        .line7 { top: 70%; transform: rotate(10deg); }
+        .line8 { top: 80%; transform: rotate(10deg); }
+        .line9 { top: 90%; transform: rotate(10deg); }
+        .line10 { top: 100%; transform: rotate(10deg); }
+
+        /* Left side lines */
+        .left-line1 { top: 10%; transform: rotate(-10deg); }
+        .left-line2 { top: 20%; transform: rotate(-10deg); }
+        .left-line3 { top: 30%; transform: rotate(-10deg); }
+        .left-line4 { top: 40%; transform: rotate(-10deg); }
+        .left-line5 { top: 50%; transform: rotate(-10deg); }
+        .left-line6 { top: 60%; transform: rotate(-10deg); }
+        .left-line7 { top: 70%; transform: rotate(-10deg); }
+        .left-line8 { top: 80%; transform: rotate(-10deg); }
+        .left-line9 { top: 90%; transform: rotate(-10deg); }
+        .left-line10 { top: 100%; transform: rotate(-10deg); }
+
+        /* Middle container */
+        .container-about {
+            position: absolute;
+            top: 100vh;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 40vw;
+            background-color: #C4FF58;
+            display: flex;
+            justify-content: center;
+            color: #160000;
+            overflow: hidden;
+            pointer-events: none; /* Prevent interaction */    opacity: 1 !important; /* Ensures it's visible */
+            visibility: visible !important; /* In case it's hidden */
+            z-index: 2;
+    
+
+        }
+        
+        .about {
+            font-family: "Satoshi";
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: white;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+        .about p{
+            margin-top: 1vw;
+            width: 75%;
+            font-size: 2vw;
+            color: #160000;
+            text-align: justify;
+
+        }
+
+        .about h1 {
+            font-size: 1vw;
+            background: black;
+            width: 100%;
+            top: 0;
+            font-family: "Bebas Neue";
+            color: #C4FF58;
+            font-weight: 400;
+        }
+
+        .line-contain{
+            overflow: hidden;
+            height: 154vh;
+            z-index: 1;
+        }
+        
+        .skills{ 
+            width: 100%;
+            font-family: "Bebas Neue";
+        }
+        .cloud {
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically */
+            width: 100%;
+            height: 250px;
+            
+        }
+        .cloud-column.left-column {
+            font-size: 10vw;
+            display: flex;
+            flex-direction: column;
+            justify-content:end; /* Centers vertically */
+            flex: 1;
+            text-align: center;
+            height: 100%;
+            border-right: 1px solid black;
+            
+        }
+        .cloud-column {
+
+            flex: 1;
+            text-align: center;
+            border-bottom: 1px solid black;
+            height: 100%;
+            color:#160000 ;
+            
+        }
+        .cloud-column h2 {
+            font-size: 1.5vw;
+        }
+        .cloud-column.right-column {
+            display: flex;
+            flex-direction: column;
+
+            flex: 1;
+        }
+
+        .cloud-column.right-column > div {
+            display: flex;
+            flex-direction: column;
+            justify-content:end;             
+            align-items: center; /* Centers horizontally */
+            flex: 1;
+            text-align: center;
+            height: 100%;
+            border-right: 1px solid black;
+        }
+        .cloud-column.right-column{
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+
+        }
+        .gcp,.aws{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: "Bebas Neue";
+            font-weight: 400;
+            font-size: 5vw !important;
+            justify-content:end !important; 
+        }
+        
+        .azure{
+            font-family: "Satoshi";
+            font-weight: 800;
+            font-size: 4vw !important;
+        }
+        .aws-cloud {
+            display: flex;
+
+            width: 100%;
+                }
+
+        .aws-columns {
+            width: 100%;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .aws-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            text-align: center;
+        }
+
+        .left {
+            justify-content: center;  
+            font-family: "Bebas Neue";
+            font-weight: 100; 
+            font-size: 4vw;   
+            font-family: "Satoshi";  
+            color: #160000;
+        }
+
+        .right {
+            color: #160000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Satoshi";
+            font-weight: 100;
+            border-left: 1px solid black;
+            height: 100%;
+            font-size:4vw;
+            
+        }
+
+        .iac{
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically */
+            width: 100%;
+            height: 200px;
+        }
+        .iac.right,.iac.left{
+            border-bottom: 1px black solid;
+        }
+        .ci-cd{
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically */
+            width: 100%;
+            height: 200px;
+        }
+
+        .ci-cd.right , .ci-cd.left {
+            border-left: none;
+            border-bottom: 1px black solid;
+            flex: 1;
+            
+        }
+
+        .ci-cd.middle{
+            border-top:none;
+            border: 1px black solid;
+            flex: 1.5;
+            font-family: "Satoshi";
+            font-weight: 800;
+            font-size:4vw;
+            color: #160000;        
+        }
+        .rocket-container img {
+            position: absolute;
+            width: 150%;
+            mix-blend-mode: multiply;
+            rotate: 90deg;
+        }
+
+        .ci-cd.right{
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flame {
+            position: absolute;
+            width: 20px;
+            height: 50px;
+            background: orange;
+            bottom: -30px;
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0;
+            transform-origin: center;
+        }
+
+
+        .projects {
+            z-index: 3;
+            min-height: 100vh;
+            position: relative;
+            background: #C4FF58;
+        }
+
+        .projects-title {
+            text-align: center;
+            font-family: "Bebas Neue";
+            font-size: 1vw;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #160000;
+            color: #C4FF58;
+        }
+
+        /* Window styles */
+        .window {
+            position: absolute;
+            width: 500px;
+            background: white;
+            border: 2px solid black;
+            border-radius: 5px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            user-select: none;
+        }
+
+        .window.active {
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .window-header {
+            background:#C4FF58;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            cursor: grab;
+        }
+
+        .window-header.grabbing {
+            cursor: grabbing;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #000000;
+            border-radius: 16%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+
+
+        .control-btn:hover {
+            background: #ffffff;
+            filter: invert(100%);
+        }
+
+        .window-content {
+            padding: 1.5rem;
+            font-family: "Satoshi";
+        }
+
+        .window-content img {
+            width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+        
+
+
+
+        .left-column-bottom {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .row-bottom {
+            background-color: #ff550000;
+            padding: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .right-column-bottom {
+            flex: 1;
+            background-color: #C4FF58;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .bottom-flex {
+            height: 50vh;
+            display: flex;
+            flex-direction: row;
+            align-items: end;
+            justify-content: space-between;
+            background: #C4FF58;
+            font-family: "Satoshi";
+
+        }
+        .row-bottom-gif img {
+            width: 300px;
+            mix-blend-mode: multiply;
+        }
+        .right-bottom-gif img {
+            width: 200px;
+            mix-blend-mode: multiply;
+        }
+        .right-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            position: relative;
+        }
+        .right-bottom h2 {
+            font-size: 1vw;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+            font-family:"Bebas Neue" ;
+        }
+        .marquee-text {
+            font-family: "NeueBit";
+            white-space: nowrap;
+            font-size: 5vw;
+            font-weight: bold;
+            position: absolute;
+            width: 100%;
+            color: #C4FF58;
+        }
+
+        .bottom{
+            height: 10vh;
+        }
+
+        .tools{
+            font-family: "Satoshi";
+            display: flex;
+            justify-content: center left;
+            align-items: end start;
+            gap: 2vw;
+            margin-top: 2vw;
+            font-size: 2vw;
+        }
+
+        .footer {
+            margin-top: 10vh !important;
+            position: sticky !important;
+    background: #160000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    z-index: 1;
+    width: 85%;
+    margin: 0 auto;
+    transition: all 0.5s ease; /* Added for smoother animation */
+}
+
+.container-bottom {
+    position: sticky !important;
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    height: 50vh;
+    margin: 0 auto; /* Added to center the container */
+    padding: 0 20px; /* Added padding for better spacing */
+}
+.line{
+    height: 10vh;
+}
+
+.right-bottom-gif img{
+    height: 150px;
+    width: auto;
+    mix-blend-mode: multiply;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row1">
+            <div class="col1">R</div>
+            <div class="col2"><p>I'm an undergraduate student <br>pursuing a Bachelor's degree in <br>Computer Engineering, with a particular <br>passion for Cloud Computing.</p></div>
+            <div class="col3">
+                <div class="about-me">▸ About</div>
+                <div class="work">▸ Work</div>
+                <div class="contact">▸ Contact</div>
+            </div>
+            <div class="col4">
+                <div class="socials"></div>
+                <div class="toggle-mode"></div>
+            </div>
+            <div class="col5">Col 5</div>
+            <div class="col6">Col 6</div>
+        </div>
+        <div class="row2">
+            <a-waves>
+              <canvas class="js-canvas"></canvas>
+            </a-waves>
+          </div>
+        <div class="row3">
+            <div class="subrow1">.</div>
+            <div class="subrow2">RIYANSH ✦ JAIN</div>
+            <div class="subrow3">.</div>
+        </div>
+    </div>
+    <div class="line-contain">
+            <div class="lines-container">
+                <div class="vertical-line1"></div>
+                <div class="vertical-line2"></div>
+                <div class="vertical-line3"></div>
+                <div class="vertical-line4"></div>
+                <div class="vertical-line5"></div>
+                <div class="vertical-line6"></div>
+                
+                <!-- Right side lines -->
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+                <div class="line4"></div>
+                <div class="line5"></div>
+                <div class="line6"></div>
+                <div class="line7"></div>
+                <div class="line8"></div>
+                <div class="line9"></div>
+                <div class="line10"></div>
+        
+                <!-- Left side lines -->
+                <div class="left-line1"></div>
+                <div class="left-line2"></div>
+                <div class="left-line3"></div>
+                <div class="left-line4"></div>
+                <div class="left-line5"></div>
+                <div class="left-line6"></div>
+                <div class="left-line7"></div>
+                <div class="left-line8"></div>
+                <div class="left-line9"></div>
+                <div class="left-line10"></div>
+            </div>
+            <div class="container-about">
+                <div class="about">
+                <h1>About</h1>
+                <p>I am a Cloud & DevOps Engineer with expertise in AWS, Azure, GCP, Terraform, Docker, and CI/CD automation. Currently pursuing a B.Tech in Cloud Computing, I have interned at Celebal Technologies and BM Infotrade, optimizing cloud environments and automating deployments.</p> 
+                <br>
+                    <div class="skills">
+                        <h1>Skills</h1>
+                        <div class="cloud">
+                            <div class="cloud-column left-column">
+                                <h2 class="azure">AZURE</h2>
+                            </div>
+                            <div class="cloud-column right-column">
+                                <h2 class="gcp" style="border-bottom: 1px solid black; font-weight: 200;">GCP</h2>
+                                <div class="aws-cloud">
+                                    <div class="aws-columns">
+                                        <div class="aws-column left">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-250 -250 500 500">
+                                                <!-- Outer Circle (Sphere) -->
+                                                <circle cx="0" cy="0" r="200" stroke="black" stroke-width="2" fill="none" />
+                                                
+                                                <!-- Longitude Lines -->
+                                                <g stroke="black" stroke-width="1" fill="none">
+                                                <path d="M-190 0 A190 190 0 0 1 190 0" />
+                                                <path d="M-160 0 A160 190 0 0 1 160 0" />
+                                                <path d="M-120 0 A120 190 0 0 1 120 0" />
+                                                <path d="M-80 0 A80 190 0 0 1 80 0" />
+                                                <path d="M-40 0 A40 190 0 0 1 40 0" />
+                                                </g>
+                                                
+                                                <!-- Latitude Lines -->
+                                                <g stroke="black" stroke-width="1" fill="none">
+                                                <ellipse cx="0" cy="0" rx="190" ry="60" />
+                                                <ellipse cx="0" cy="0" rx="160" ry="50" />
+                                                <ellipse cx="0" cy="0" rx="120" ry="40" />
+                                                <ellipse cx="0" cy="0" rx="80" ry="30" />
+                                                <ellipse cx="0" cy="0" rx="40" ry="20" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="aws-column right">
+                                            <h2 style="font-size: 4vw !important;">AWS</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div> 
+                        <div class="iac">
+                            <div class="iac left">DOCKER</div>
+                            <div class="iac right">TERRA<br>FORM</div>
+                        </div>   
+                        <div class="ci-cd">
+                            <div class="ci-cd left">
+                                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                <svg width="100" height="60" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" version="1.1">    
+                                    <!-- Left Eye -->
+                                    <circle cx="35" cy="30" r="20" fill="white" stroke="black" stroke-width="2"/>
+                                    <circle class="pupil" cx="35" cy="35" r="7" fill="black" data-x="35" data-y="35"/>
+                                    
+                                    <!-- Right Eye -->
+                                    <circle cx="65" cy="30" r="20" fill="white" stroke="black" stroke-width="2"/>
+                                    <circle class="pupil" cx="65" cy="35" r="7" fill="black" data-x="65" data-y="35"/>
+                                </svg>
+                                
+                            </div>
+                            <div class="ci-cd middle">CI/CD</div>
+                            <div class="ci-cd right rocket-container">
+                                <img src="loop.gif">
+                            </div>
+                        </div>
+                    </div>      
+                </div>
+            </div>
+    </div>
+    <div class="projects">
+        <div class="projects-title">MY PROJECTS</div>
+        
+        <!-- Project windows -->
+        <div class="window" id="window1">
+            <div class="window-header">
+                <div>VM Actions</div>
+                <div class="controls">
+                    <div class="control-btn minimize">☐</div>
+                    <div class="control-btn maximize">❏</div>
+                    <div class="control-btn close">✖</div>
+                </div>
+            </div>
+            <div class="window-content">
+                <p>This project automates the deployment of a Windows Server 2022 VM on Microsoft Azure using ARM templates. The setup includes networking components and configuration within the Central India region.</p>
+                <img src="/Images/text-to-speech.png" alt="VM Deployment">
+            </div>
+        </div>
+
+        <div class="window" id="window2">
+            <div class="window-header">
+                <div>Cloud Storage Automation</div>
+                <div class="controls">
+                    <div class="control-btn minimize">☐</div>
+                    <div class="control-btn maximize">❏</div>
+                    <div class="control-btn close">✖</div>
+                </div>
+            </div>
+            <div class="window-content">
+                <p>Automated backup solution using Python and Azure SDK for seamless file management and scheduled backups to cloud storage.</p>
+                <img src="/Images/VM-Deployment-via-Github.png" alt="Storage Automation">
+            </div>
+        </div>
+
+        <div class="window" id="window3">
+            <div class="window-header">
+                <div>DevOps Pipeline</div>
+                <div class="controls">
+                    <div class="control-btn minimize">☐</div>
+                    <div class="control-btn maximize">❏</div>
+                    <div class="control-btn close">✖</div>
+                </div>
+            </div>
+            <div class="window-content">
+                <p>Implemented CI/CD pipeline using GitHub Actions for automated testing and deployment of cloud infrastructure.</p>
+                
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container-bottom">
+            <div class="left-column-bottom">
+                <div class="row-bottom bottom">
+                    <div class="marquee-text">RIYANSH JAIN. CLOUD & DEVOPS TOOLS RIYANSH JAIN. CLOUD </div>
+                </div>
+                <div class="row-bottom bottom-flex">
+                    <p>I'm an undergraduate student pursuing a Bachelor's degree in Computer Engineering, with a particular passion for Cloud Computing.</p>
+                    <div class="row-bottom-gif"><img src="random.gif"></div>
+                </div>
+            </div>
+            <div class="right-column-bottom">
+                <div class="right-bottom">
+                    <div class="right-bottom-gif"><img src="profile.gif"></div>
+                    <h2>CONTACT</h2>
+                </div>
+                <div class="tools">
+                    <div class="cloud-tools">AZURE<br>AWS<br>GCP</div>
+                    <div class="devops-tools">TERRAFORM<br>DOCKER</div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="line"></div>
+
+    <script>
+        gsap.to(".marquee-text", {
+    x: "-100%",
+    duration: 6,
+    repeat: -1,
+    ease: "linear"
+});
+
+
+    </script>
+    <script>
+        class Noise {
+          constructor(seed) {
+            this.seed = seed || Math.random();
+            this.grad3 = [
+              [1,1,0],[-1,1,0],[1,-1,0],[-1,-1,0],
+              [1,0,1],[-1,0,1],[1,0,-1],[-1,0,-1],
+              [0,1,1],[0,-1,1],[0,1,-1],[0,-1,-1]
+            ];
+            this.p = new Array(256);
+            this.perm = new Array(512);
+            
+            for (let i = 0; i < 256; i++) {
+              this.p[i] = Math.floor(this.seed * 256);
+            }
+            
+            for (let i = 0; i < 512; i++) {
+              this.perm[i] = this.p[i & 255];
+            }
+          }
+          
+          dot(g, x, y) {
+            return g[0] * x + g[1] * y;
+          }
+          
+          mix(a, b, t) {
+            return (1 - t) * a + t * b;
+          }
+          
+          fade(t) {
+            return t * t * t * (t * (t * 6 - 15) + 10);
+          }
+          
+          perlin2(x, y) {
+            let X = Math.floor(x) & 255;
+            let Y = Math.floor(y) & 255;
+            
+            x -= Math.floor(x);
+            y -= Math.floor(y);
+            
+            let u = this.fade(x);
+            let v = this.fade(y);
+            
+            let A = this.perm[X] + Y;
+            let B = this.perm[X + 1] + Y;
+            
+            let g1 = this.grad3[this.perm[A] % 12];
+            let g2 = this.grad3[this.perm[B] % 12];
+            let g3 = this.grad3[this.perm[A + 1] % 12];
+            let g4 = this.grad3[this.perm[B + 1] % 12];
+            
+            let n00 = this.dot(g1, x, y);
+            let n10 = this.dot(g2, x - 1, y);
+            let n01 = this.dot(g3, x, y - 1);
+            let n11 = this.dot(g4, x - 1, y - 1);
+            
+            let x1 = this.mix(n00, n10, u);
+            let x2 = this.mix(n01, n11, u);
+            
+            return this.mix(x1, x2, v);
+          }
+        }
+        
+        class AWaves extends HTMLElement {
+
+          connectedCallback() {
+            this.canvas = this.querySelector(".js-canvas");
+            this.ctx = this.canvas.getContext("2d");
+            
+            this.mouse = {
+              x: -10,
+              y: 0,
+              lx: 0,
+              ly: 0,
+              sx: 0,
+              sy: 0,
+              v: 0,
+              vs: 0,
+              a: 0,
+              set: false
+            };
+            this.lines = [];
+            this.noise = new Noise(Math.random());
+            
+            this.setSize();
+            this.setLines();
+            this.bindEvents();
+            
+            gsap.ticker.add(this.tick.bind(this));
+          }
+
+          bindEvents() {
+            window.addEventListener("resize", this.onResize.bind(this));
+            window.addEventListener("mousemove", this.onMouseMove.bind(this));
+            this.addEventListener("touchmove", this.onTouchMove.bind(this));
+          }
+
+          onResize() {
+            this.setSize();
+            this.setLines();
+          }
+ 
+          onMouseMove(e) {
+            this.updateMousePosition(e.pageX, e.pageY);
+          }
+
+          onTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            this.updateMousePosition(touch.clientX, touch.clientY);
+          }
+
+          updateMousePosition(x, y) {
+            const { mouse } = this;
+            mouse.x = x - this.bounding.left;
+            mouse.y = y - this.bounding.top + window.scrollY;
+            if (!mouse.set) {
+              mouse.sx = mouse.x;
+              mouse.sy = mouse.y;
+              mouse.lx = mouse.x;
+              mouse.ly = mouse.y;
+              mouse.set = true;
+            }
+          }
+
+          setSize() {
+            this.bounding = this.getBoundingClientRect();
+            this.canvas.width = this.bounding.width;
+            this.canvas.height = this.bounding.height;
+          }
+
+          setLines() {
+            const { width, height } = this.bounding;
+            this.lines = [];
+            const xGap = 10;
+            const yGap = 32;
+            const oWidth = width + 200;
+            const oHeight = height + 30;
+            const totalLines = Math.ceil(oWidth / xGap);
+            const totalPoints = Math.ceil(oHeight / yGap);
+            const xStart = (width - xGap * totalLines) / 2;
+            const yStart = (height - yGap * totalPoints) / 2;
+            
+            for (let i = 0; i <= totalLines; i++) {
+              const points = [];
+              for (let j = 0; j <= totalPoints; j++) {
+                const point = {
+                  x: xStart + xGap * i,
+                  y: yStart + yGap * j,
+                  wave: { x: 0, y: 0 },
+                  cursor: { x: 0, y: 0, vx: 0, vy: 0 }
+                };
+                points.push(point);
+              }
+              this.lines.push(points);
+            }
+          }
+
+          movePoints(time) {
+            const { lines, mouse, noise } = this;
+            lines.forEach((points) => {
+              points.forEach((p) => {
+                const move =
+                  noise.perlin2(
+                    (p.x + time * 0.0125) * 0.002,
+                    (p.y + time * 0.005) * 0.0015
+                  ) * 12;
+                p.wave.x = Math.cos(move) * 32;
+                p.wave.y = Math.sin(move) * 16;
+                
+                const dx = p.x - mouse.sx;
+                const dy = p.y - mouse.sy;
+                const d = Math.hypot(dx, dy);
+                const l = Math.max(175, mouse.vs);
+                
+                if (d < l) {
+                  const s = 1 - d / l;
+                  const f = Math.cos(d * 0.001) * s;
+                  p.cursor.vx += Math.cos(mouse.a) * f * l * mouse.vs * 0.00065;
+                  p.cursor.vy += Math.sin(mouse.a) * f * l * mouse.vs * 0.00065;
+                }
+                
+                p.cursor.vx += (0 - p.cursor.x) * 0.005; 
+                p.cursor.vy += (0 - p.cursor.y) * 0.005;
+                p.cursor.vx *= 0.925; 
+                p.cursor.vy *= 0.925;
+                p.cursor.x += p.cursor.vx * 2; 
+                p.cursor.y += p.cursor.vy * 2;
+                p.cursor.x = Math.min(100, Math.max(-100, p.cursor.x)); 
+                p.cursor.y = Math.min(100, Math.max(-100, p.cursor.y));
+              });
+            });
+          }
+ 
+          moved(point, withCursorForce = true) {
+            const coords = {
+              x: point.x + point.wave.x + (withCursorForce ? point.cursor.x : 0),
+              y: point.y + point.wave.y + (withCursorForce ? point.cursor.y : 0)
+            };
+            coords.x = Math.round(coords.x * 10) / 10;
+            coords.y = Math.round(coords.y * 10) / 10;
+            return coords;
+          }
+                 
+          drawLines() {
+            const { lines, ctx, bounding } = this;
+            ctx.clearRect(0, 0, bounding.width, bounding.height);
+            ctx.beginPath();
+            ctx.strokeStyle = "#160000"; 
+            
+            lines.forEach((points) => {
+              let p1 = this.moved(points[0], false);
+              ctx.moveTo(p1.x, p1.y);
+              
+              points.forEach((p1, pIndex) => {
+                const isLast = pIndex === points.length - 1;
+                p1 = this.moved(p1, !isLast);
+                const p2 = this.moved(
+                  points[pIndex + 1] || points[points.length - 1],
+                  !isLast
+                );
+                ctx.lineTo(p1.x, p1.y);
+              });
+            });
+            
+            ctx.stroke();
+          }
+
+          tick(time) {
+            const { mouse } = this;
+            
+            mouse.sx += (mouse.x - mouse.sx) * 0.1;
+            mouse.sy += (mouse.y - mouse.sy) * 0.1;
+            
+            const dx = mouse.x - mouse.lx;
+            const dy = mouse.y - mouse.ly;
+            const d = Math.hypot(dx, dy);
+            mouse.v = d;
+            mouse.vs += (d - mouse.vs) * 0.1;
+            mouse.vs = Math.min(100, mouse.vs);
+            
+            mouse.lx = mouse.x;
+            mouse.ly = mouse.y;
+            
+            mouse.a = Math.atan2(dy, dx);
+            
+            this.style.setProperty("--x", `${mouse.sx}px`);
+            this.style.setProperty("--y", `${mouse.sy}px`);
+            
+            this.movePoints(time);
+            this.drawLines();
+          }
+        }
+        
+        if (!customElements.get('a-waves')) {
+          customElements.define("a-waves", AWaves);
+        }
+      </script>
+          <script>
+            gsap.fromTo(".slice",
+                { rotationX: 0, opacity: 1 },
+                {
+                    rotationY: 360,
+                    repeat: -1,
+                    duration: 2,
+                    stagger: 0.1,
+                    ease: "linear",
+                    transformOrigin: "50% 50%"
+                }
+            );
+        </script>
+</body>
+</html>
