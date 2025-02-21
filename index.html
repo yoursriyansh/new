@@ -12,6 +12,45 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
     <style>
+
+        @media only screen and (max-width: 768px) {
+            .lines-container{
+visibility: hidden;}
+
+.line-contain{
+            height: 140vh !important;
+            width: 100vw;
+        }
+
+        .about h1 , .skills h1{
+            font-size:4vw !important;
+        }
+        .about p {
+            font-size:5vw !important;
+        }
+        
+        .container-about{
+            width: 100% !important;
+            left: 0%;
+        }
+
+        .projects-title{
+            font-size: 4vw !important;
+        }
+
+        .window p{
+            font-size:3vw !important;
+        }
+
+        .control-btn {
+            width:5px !important;
+            height:5px !important;
+            padding:7.5px !important;
+        }
+        }
+
+
+
         * {
             margin: 0;
             padding: 0;
@@ -531,12 +570,13 @@
             padding: 1rem;
             background: #160000;
             color: #C4FF58;
+            z-index:1000
         }
 
         /* Window styles */
         .window {
             position: absolute;
-            width: 500px;
+            width: 50%;
             background: white;
             border: 2px solid black;
             border-radius: 5px;
@@ -546,7 +586,7 @@
 
         .window.active {
             box-shadow: 8px 8px 20px rgba(0,0,0,0.3);
-            z-index: 1000;
+            z-index: 999;
         }
 
         .window-header {
@@ -557,11 +597,14 @@
             align-items: center;
             border-bottom: 1px solid #ddd;
             cursor: grab;
+            font-family: "Bebas Neue"
         }
 
         .window-header.grabbing {
             cursor: grabbing;
         }
+
+
 
         .controls {
             display: flex;
