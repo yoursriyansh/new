@@ -12,7 +12,10 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
     <style>
-
+ body a{
+    color: #160000;
+    text-decoration: none;
+ }
         @media only screen and (max-width: 768px) {
             .lines-container{
 visibility: hidden;}
@@ -113,6 +116,7 @@ visibility: hidden;}
             scrollbar-width: none;  /* Firefox */
             }
         body, html {
+            border: 0.5vw black solid ;
             color: #160000;
             background: #7FA3C7;
         }
@@ -801,6 +805,15 @@ visibility: hidden;}
     width: auto;
     mix-blend-mode: multiply;
 }
+.toggle-mode img{
+    height: 2vw;
+}
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -810,11 +823,11 @@ visibility: hidden;}
             <div class="col2"><p>I'm an undergraduate student <br>pursuing a Bachelor's degree in <br>Computer Engineering, with a particular <br>passion for Cloud Computing.</p></div>
             <div class="col3">
                 <div class="about-me"><a href="#container-about">▸ About</a></div>
-                <div class="work"><a href="#container-projects">▸ Work</a></div>
+                <div class="work"><a href="#container-contact">▸ Work</a></div>
                 <div class="contact"><a href="#container-contact">▸ Contact</a></div>
             </div>
             <div class="col4">
-                <div class="toggle-mode"></div>
+                <div class="toggle-mode"><img src="dark-mode.png"></div>
             </div>
             <div class="col5">Col 5</div>
             <div class="col6">Col 6</div>
@@ -1293,5 +1306,6 @@ visibility: hidden;}
                 }
             );
         </script>
+        
 </body>
 </html>
